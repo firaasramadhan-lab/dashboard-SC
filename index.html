@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Success Dashboard — Cakrawala University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-mark">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="16" fill="#2563EB"/>
+        <path d="M8 20L16 10L24 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 20L16 14L20 20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-title">Cakrawala</span>
+      <span class="logo-sub">Student Success</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">MENU UTAMA</div>
+    <a class="nav-item active" onclick="showPage('dashboard')" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a class="nav-item" onclick="showPage('absensi')" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <span>Database Absensi</span>
+      <span class="badge-count" id="badge-absensi">12</span>
+    </a>
+    <a class="nav-item" onclick="showPage('pengumuman')" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span>Poster Pengumuman</span>
+    </a>
+    <a class="nav-item" onclick="showPage('keluhan')" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span>Keluhan Mahasiswa</span>
+      <span class="badge-count urgent" id="badge-keluhan">3</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar">SS</div>
+      <div class="user-detail">
+        <span class="user-name">Admin SSC</span>
+        <span class="user-role">Student Success Team</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <button class="menu-toggle" onclick="toggleSidebar()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="topbar-title" id="page-title">Dashboard</div>
+  <div class="topbar-right">
+    <div class="topbar-date" id="current-date"></div>
+    <button class="notif-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <span class="notif-dot"></span>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+  <!-- PAGE: DASHBOARD -->
+  <div id="page-dashboard" class="page active">
+    <div class="page-header">
+      <h1>Selamat Datang, Tim Student Success 👋</h1>
+      <p>Pantau kondisi mahasiswa Cakrawala University secara real-time.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="stat-info">
+          <span class="stat-num">1,248</span>
+          <span class="stat-label">Total Mahasiswa Aktif</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="stat-info">
+          <span class="stat-num">47</span>
+          <span class="stat-label">Alpha Bulan Ini</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon yellow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="stat-info">
+          <span class="stat-num">23</span>
+          <span class="stat-label">Izin Terverifikasi</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="stat-info">
+          <span class="stat-num">8</span>
+          <span class="stat-label">Keluhan Belum Ditangani</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <div class="card-header">
+          <h3>Ketidakhadiran Terbaru</h3>
+          <button class="btn-text" onclick="showPage('absensi')">Lihat Semua →</button>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>Mahasiswa</th><th>Matkul</th><th>Status</th><th>Alasan</th></tr></thead>
+            <tbody>
+              <tr><td><b>Rafi Ananda</b><br><small>2021050123</small></td><td>Basis Data</td><td><span class="badge red">Alpha</span></td><td>—</td></tr>
+              <tr><td><b>Sinta Dewi</b><br><small>2021050087</small></td><td>Kalkulus II</td><td><span class="badge yellow">Izin</span></td><td>Sakit, surat menyusul</td></tr>
+              <tr><td><b>Dimas Prayogo</b><br><small>2022030045</small></td><td>Pemrog. Web</td><td><span class="badge red">Alpha</span></td><td>—</td></tr>
+              <tr><td><b>Lestari N.</b><br><small>2022030091</small></td><td>Statistika</td><td><span class="badge yellow">Izin</span></td><td>Keluarga sakit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Keluhan Terbaru</h3>
+          <button class="btn-text" onclick="showPage('keluhan')">Lihat Semua →</button>
+        </div>
+        <div class="keluhan-list">
+          <div class="keluhan-item urgent">
+            <div class="keluhan-meta">
+              <span class="keluhan-name">Budi Santoso</span>
+              <span class="badge red">Urgent</span>
+            </div>
+            <p class="keluhan-text">Nilai UTS tidak keluar di sistem sudah 2 minggu lebih...</p>
+            <span class="keluhan-time">2 jam lalu</span>
+          </div>
+          <div class="keluhan-item">
+            <div class="keluhan-meta">
+              <span class="keluhan-name">Ayu Rahmawati</span>
+              <span class="badge blue">Normal</span>
+            </div>
+            <p class="keluhan-text">Akses e-learning tidak bisa login sejak kemarin pagi.</p>
+            <span class="keluhan-time">5 jam lalu</span>
+          </div>
+          <div class="keluhan-item">
+            <div class="keluhan-meta">
+              <span class="keluhan-name">Hendra Wijaya</span>
+              <span class="badge blue">Normal</span>
+            </div>
+            <p class="keluhan-text">Jadwal kuliah bentrok antara matkul Etika & Hukum TI.</p>
+            <span class="keluhan-time">1 hari lalu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: ABSENSI -->
+  <div id="page-absensi" class="page">
+    <div class="page-header">
+      <h1>Database Absensi Mahasiswa</h1>
+      <p>Rekap kehadiran, alpha, dan izin beserta keterangan alasan.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-absensi" placeholder="Cari nama / NIM / matkul..." oninput="filterAbsensi()"/>
+      </div>
+      <div class="filter-group">
+        <select id="filter-status" onchange="filterAbsensi()">
+          <option value="">Semua Status</option>
+          <option value="Alpha">Alpha</option>
+          <option value="Izin">Izin</option>
+        </select>
+        <select id="filter-prodi" onchange="filterAbsensi()">
+          <option value="">Semua Prodi</option>
+          <option value="Teknik Informatika">Teknik Informatika</option>
+          <option value="Sistem Informasi">Sistem Informasi</option>
+          <option value="Manajemen">Manajemen</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="openModal('modal-tambah-absensi')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Tambah Data
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrapper">
+        <table class="data-table" id="tabel-absensi">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Mahasiswa</th>
+              <th>Prodi</th>
+              <th>Mata Kuliah</th>
+              <th>Tanggal</th>
+              <th>Status</th>
+              <th>Alasan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="body-absensi"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: PENGUMUMAN -->
+  <div id="page-pengumuman" class="page">
+    <div class="page-header">
+      <h1>Poster Pengumuman</h1>
+      <p>Buat dan kelola informasi pengumuman untuk mahasiswa.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Cari pengumuman..."/>
+      </div>
+      <button class="btn-primary" onclick="openModal('modal-tambah-pengumuman')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Buat Pengumuman
+      </button>
+    </div>
+
+    <div class="poster-grid" id="poster-grid"></div>
+  </div>
+
+  <!-- PAGE: KELUHAN -->
+  <div id="page-keluhan" class="page">
+    <div class="page-header">
+      <h1>Data Keluhan Mahasiswa</h1>
+      <p>Pantau dan tindaklanjuti keluhan mahasiswa dengan cepat.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-keluhan" placeholder="Cari keluhan / nama..." oninput="filterKeluhan()"/>
+      </div>
+      <div class="filter-group">
+        <select id="filter-prioritas" onchange="filterKeluhan()">
+          <option value="">Semua Prioritas</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Normal">Normal</option>
+        </select>
+        <select id="filter-keluhan-status" onchange="filterKeluhan()">
+          <option value="">Semua Status</option>
+          <option value="Belum Ditangani">Belum Ditangani</option>
+          <option value="Dalam Proses">Dalam Proses</option>
+          <option value="Selesai">Selesai</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="openModal('modal-tambah-keluhan')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Input Keluhan
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrapper">
+        <table class="data-table" id="tabel-keluhan">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Mahasiswa</th>
+              <th>Kategori</th>
+              <th>Keluhan</th>
+              <th>Tanggal</th>
+              <th>Prioritas</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="body-keluhan"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODALS -->
+
+<!-- Modal: Tambah Absensi -->
+<div class="modal-overlay" id="modal-tambah-absensi">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Tambah Data Absensi</h3>
+      <button class="modal-close" onclick="closeModal('modal-tambah-absensi')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nama Mahasiswa</label>
+          <input type="text" id="in-nama" placeholder="Masukkan nama lengkap"/>
+        </div>
+        <div class="form-group">
+          <label>NIM</label>
+          <input type="text" id="in-nim" placeholder="Contoh: 2022030001"/>
+        </div>
+        <div class="form-group">
+          <label>Program Studi</label>
+          <select id="in-prodi">
+            <option>Teknik Informatika</option>
+            <option>Sistem Informasi</option>
+            <option>Manajemen</option>
+            <option>Akuntansi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mata Kuliah</label>
+          <input type="text" id="in-matkul" placeholder="Nama mata kuliah"/>
+        </div>
+        <div class="form-group">
+          <label>Tanggal</label>
+          <input type="date" id="in-tanggal"/>
+        </div>
+        <div class="form-group">
+          <label>Status Kehadiran</label>
+          <select id="in-status">
+            <option>Alpha</option>
+            <option>Izin</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>Alasan / Keterangan</label>
+          <textarea id="in-alasan" placeholder="Kosongkan jika Alpha tanpa keterangan. Isi alasan jika Izin..." rows="3"></textarea>
+        </div>
+        <div class="form-group full-width">
+          <label>No. WhatsApp Mahasiswa</label>
+          <input type="text" id="in-wa" placeholder="Contoh: 08123456789"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('modal-tambah-absensi')">Batal</button>
+      <button class="btn-wa" onclick="kirimWaAbsensi()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Simpan & Kirim WA
+      </button>
+      <button class="btn-primary" onclick="simpanAbsensi()">Simpan Data</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Tambah Pengumuman -->
+<div class="modal-overlay" id="modal-tambah-pengumuman">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3>Buat Poster Pengumuman</h3>
+      <button class="modal-close" onclick="closeModal('modal-tambah-pengumuman')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label>Judul Pengumuman</label>
+          <input type="text" id="peng-judul" placeholder="Masukkan judul pengumuman..."/>
+        </div>
+        <div class="form-group">
+          <label>Kategori</label>
+          <select id="peng-kategori">
+            <option>Akademik</option>
+            <option>Kegiatan</option>
+            <option>Administrasi</option>
+            <option>Pengumuman Nilai</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Pengumuman</label>
+          <input type="date" id="peng-tanggal"/>
+        </div>
+        <div class="form-group full-width">
+          <label>Isi Pengumuman</label>
+          <textarea id="peng-isi" rows="5" placeholder="Tuliskan isi informasi pengumuman secara lengkap..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Target Penerima</label>
+          <select id="peng-target">
+            <option>Semua Mahasiswa</option>
+            <option>Mahasiswa Semester 1-2</option>
+            <option>Mahasiswa Semester 3-4</option>
+            <option>Mahasiswa Semester 5+</option>
+            <option>Teknik Informatika</option>
+            <option>Sistem Informasi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Warna Poster</label>
+          <select id="peng-warna">
+            <option value="blue">Biru (Akademik)</option>
+            <option value="green">Hijau (Kegiatan)</option>
+            <option value="red">Merah (Urgent)</option>
+            <option value="yellow">Kuning (Informasi)</option>
+            <option value="purple">Ungu (Prestasi)</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>Nomor WA Tujuan Broadcast</label>
+          <input type="text" id="peng-wa" placeholder="Contoh: 6281234567890 (tanpa tanda +)"/>
+          <small style="color:var(--muted);margin-top:4px;display:block">Gunakan nomor grup WA atau nomor mahasiswa tujuan</small>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('modal-tambah-pengumuman')">Batal</button>
+      <button class="btn-wa" onclick="kirimWaPengumuman()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Posting & Kirim WA
+      </button>
+      <button class="btn-primary" onclick="simpanPengumuman()">Simpan Poster</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Tambah Keluhan -->
+<div class="modal-overlay" id="modal-tambah-keluhan">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Input Keluhan Mahasiswa</h3>
+      <button class="modal-close" onclick="closeModal('modal-tambah-keluhan')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nama Mahasiswa</label>
+          <input type="text" id="kel-nama" placeholder="Nama lengkap pelapor"/>
+        </div>
+        <div class="form-group">
+          <label>NIM</label>
+          <input type="text" id="kel-nim" placeholder="Nomor Induk Mahasiswa"/>
+        </div>
+        <div class="form-group">
+          <label>Kategori Keluhan</label>
+          <select id="kel-kategori">
+            <option>Akademik</option>
+            <option>Nilai & Ujian</option>
+            <option>Sistem & Teknologi</option>
+            <option>Keuangan</option>
+            <option>Fasilitas</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Prioritas</label>
+          <select id="kel-prioritas">
+            <option>Normal</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>Isi Keluhan</label>
+          <textarea id="kel-isi" rows="4" placeholder="Tuliskan keluhan secara detail..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Masuk</label>
+          <input type="date" id="kel-tanggal"/>
+        </div>
+        <div class="form-group">
+          <label>No. WA Mahasiswa</label>
+          <input type="text" id="kel-wa" placeholder="08xxxxxxxxxx"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('modal-tambah-keluhan')">Batal</button>
+      <button class="btn-wa" onclick="kirimWaKeluhan()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Simpan & Balas via WA
+      </button>
+      <button class="btn-primary" onclick="simpanKeluhan()">Simpan Keluhan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Detail Absensi -->
+<div class="modal-overlay" id="modal-detail-absensi">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Detail Absensi</h3>
+      <button class="modal-close" onclick="closeModal('modal-detail-absensi')">✕</button>
+    </div>
+    <div class="modal-body" id="detail-absensi-content"></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('modal-detail-absensi')">Tutup</button>
+      <button class="btn-wa" id="btn-wa-detail-absensi">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Kirim Peringatan via WA
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
